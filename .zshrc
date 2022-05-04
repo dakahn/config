@@ -36,7 +36,7 @@ alias v='nvim'
 alias vcfg='nvim ~/.config/nvim/init.lua'
 alias zcfg='nvim ~/.zshrc'
 alias zsrc='source ~/.zshrc'
-alias gud='
+alias caa='
   config add ~/.config/nvim/init.lua \
   ~/.config/nvim/lua/lsp.lua \
   ~/.config/nvim/lua/keymap.lua \
@@ -44,10 +44,11 @@ alias gud='
   ~/.config/nvim/lua/settings.lua \
   ~/.config/nvim/lua/statusline.lua \
   ~/.taskrc \
+  ~/.tmux.conf.local \
   ~/.alacritty.yml \
   ~/.zshrc \
   && config commit \
-  && config push origin master \
+  && config push origin main \
 '
 alias la='ls -A -1'
 alias gogh='bash -c "$(wget -qO- https://git.io/vQgMr)"'
