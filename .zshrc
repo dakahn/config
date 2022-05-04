@@ -24,6 +24,11 @@ bindkey -a 'p' pastefromclipboard
 eval "$(starship init zsh)"
 export EDITOR="/usr/bin/nvim"
 
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
 #####################################################
 # System aliases 
 #####################################################
@@ -48,9 +53,8 @@ alias caa='
   ~/.alacritty.yml \
   ~/.zshrc \
   && config commit \
-  && config push origin main \
+  && config push \
 '
-alias la='ls -A -1'
 alias gogh='bash -c "$(wget -qO- https://git.io/vQgMr)"'
 
 #####################################################
@@ -90,11 +94,5 @@ alias format='npx prettier --write .'
 # Raises the limit to 10000 open files for the current session and reloads the shell
 alias prebuild='sudo prlimit -p "$$" --nofile=10000:10000 && exec zsh'
 alias bigdev='NODE_OPTIONS=--max_old_space_size=8192 yarn dev'
-
-function current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-  echo ${ref#refs/heads/}
-}
 
 task ls
