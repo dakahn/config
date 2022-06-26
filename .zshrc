@@ -1,6 +1,7 @@
 #####################################################
 # Setup 
 #####################################################
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 TERM=screen-256color
 DISABLE_AUTO_TITLE="true"
 fpath=($fpath "/home/dak/.zfunctions")
@@ -33,12 +34,12 @@ function current_branch() {
 # System aliases 
 #####################################################
 alias ..='cd ..'
-alias n='nnn -d -e -H -r'
-alias ls='n'
+alias ls='ranger'
 alias ...='cd .. && cd ..'
 alias code='cd ~/Code'
 alias v='nvim'
-alias vcfg='nvim ~/.config/nvim/init.lua'
+alias vf='v $(fzf)'
+alias vcfg='cd ~ && nvim ~/.config/nvim/init.lua'
 alias zcfg='nvim ~/.zshrc'
 alias zsrc='source ~/.zshrc'
 alias caa='
@@ -95,4 +96,5 @@ alias format='npx prettier --write .'
 alias prebuild='sudo prlimit -p "$$" --nofile=10000:10000 && exec zsh'
 alias bigdev='NODE_OPTIONS=--max_old_space_size=8192 yarn dev'
 
+tmux
 task ls

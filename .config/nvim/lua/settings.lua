@@ -1,4 +1,4 @@
-vim.cmd('colorscheme onedark')
+vim.cmd('colorscheme darcula')
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 20
@@ -7,7 +7,7 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 vim.opt.showmode = false 
 vim.opt.showcmd = false
 vim.opt.nu = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.hidden = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.encoding = 'UTF-8'

@@ -13,7 +13,7 @@ require "paq" {
   {'nvim-treesitter/nvim-treesitter', ['do'] = ':TSUpdate'};
   {'prettier/vim-prettier', ['do'] = 'yarn install --frozen-lockfile --production' };
   'lewis6991/gitsigns.nvim';
-  'navarasu/onedark.nvim';
+  'doums/darcula';
   'phaazon/hop.nvim';
   'tpope/vim-vinegar';
   'kyazdani42/nvim-web-devicons';
@@ -23,17 +23,31 @@ require "paq" {
 require('gitsigns').setup()
 require('telescope').setup()
 require'hop'.setup()
-
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
+  ensure_installed = {
+  'css',
+  'dockerfile',
+  'graphql',
+  'html',
+  'javascript',
+  'jsdoc',
+  'json',
+  'json5',
+  'lua',
+  'scss',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'yaml',
+  },
   sync_install = false,
   highlight = {
     enable = true, 
+    use_languagetree = true,
+
   },
 }
-
-require("twilight").setup()
-
 local cmp = require('cmp')
 cmp.setup({
   sources = {

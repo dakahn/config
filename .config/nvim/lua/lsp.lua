@@ -1,22 +1,4 @@
-local config = {}
-require('nvim-lsp-installer').on_server_ready(function (server)
-  local opts = {
-    capabilities = capabilities,
-    on_attach = default_on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  }
-
-  if config[server.name] then
-    opts = vim.tbl_deep_extend('force', opts, config[server.name])
-  end
-
-  server:setup(opts)
-
-  vim.cmd [[ do User LspAttachBuffers ]]
-end)
-
+require("nvim-lsp-installer").setup{}
 local nvim_lsp = require('lspconfig')
 require'lspconfig'.rust_analyzer.setup({
     on_attach=on_attach,
