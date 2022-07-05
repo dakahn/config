@@ -20,7 +20,7 @@ map('n', '<C-K>', '<C-W><C-K>')
 map('n', '<C-L>', '<C-W><C-L>')
 map('n', '<C-H>', '<C-W><C-H>')
 
-map('n', '<leader>p', ':Telescope find_files<cr>')
+map('n', '<leader>p', ':Telescope git_files<cr>')
 map('n', '<leader>g', ':Telescope live_grep<cr>')
 map('n', '<leader>f', ':Prettier<cr>')
 map('n', '<leader>b', ':Telescope buffers<cr>')

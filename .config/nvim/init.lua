@@ -3,4 +3,5 @@ require('statusline')
 require('keymap')
 require('settings')
 require('lsp')
+require('treesitter')
 

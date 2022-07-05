@@ -34,9 +34,10 @@ function current_branch() {
 # System aliases 
 #####################################################
 alias ..='cd ..'
-alias ls='ranger'
+alias la='ls -la'
+alias lsr='ranger'
 alias ...='cd .. && cd ..'
-alias code='cd ~/Code'
+alias code='cd ~/code'
 alias v='nvim'
 alias vf='v $(fzf)'
 alias vcfg='cd ~ && nvim ~/.config/nvim/init.lua'
@@ -86,15 +87,18 @@ alias ggclean='gco -- .'
 #####################################################
 # Carbon aliases 
 #####################################################
-alias carb='cd ~/Code/carbon'
-alias carbr='cd ~/Code/carbon/packages/react'
-alias carbs='cd ~/Code/carbon-website'
-alias runcarb='cd ~/Code/carbon/packages/react && yarn run storybook'
+alias carb='cd ~/code/carbon'
+alias carbr='cd ~/code/carbon/packages/react'
+alias carbs='cd ~/code/carbon-website'
+alias runcarb='cd ~/code/carbon/packages/react && yarn run storybook'
 alias runtests='yarn test --changedSince=master'
 alias format='npx prettier --write .'
 # Raises the limit to 10000 open files for the current session and reloads the shell
 alias prebuild='sudo prlimit -p "$$" --nofile=10000:10000 && exec zsh'
 alias bigdev='NODE_OPTIONS=--max_old_space_size=8192 yarn dev'
 
-tmux
 task ls
+
+# fnm
+export PATH=/home/dakahn/.fnm:$PATH
+eval "`fnm env`"
