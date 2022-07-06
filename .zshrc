@@ -43,16 +43,10 @@ alias vf='v $(fzf)'
 alias vcfg='cd ~ && nvim ~/.config/nvim/init.lua'
 alias zcfg='nvim ~/.zshrc'
 alias zsrc='source ~/.zshrc'
-alias caa='
+alias backup_config='
   config add ~/.config/nvim/init.lua \
-  ~/.config/nvim/lua/lsp.lua \
-  ~/.config/nvim/lua/keymap.lua \
-  ~/.config/nvim/lua/plugins.lua \
-  ~/.config/nvim/lua/settings.lua \
-  ~/.config/nvim/lua/statusline.lua \
   ~/.taskrc \
   ~/.tmux.conf.local \
-  ~/.alacritty.yml \
   ~/.zshrc \
   && config commit \
   && config push \
