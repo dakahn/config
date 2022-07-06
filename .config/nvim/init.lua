@@ -4,4 +4,3 @@ require('keymap')
 require('settings')
 require('lsp')
 require('treesitter')
-

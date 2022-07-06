@@ -1,5 +1,4 @@
 vim.cmd('colorscheme dracula_pro_van_helsing')
-vim.cmd('let g:dracula_colorterm = 0')
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 20
