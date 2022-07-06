@@ -15,32 +15,19 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
+  use 'itchyny/vim-gitbranch'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
   use 'tpope/vim-commentary'
-  use 'tpope/vim-fugitive'
   use {
     'prettier/vim-prettier',
     run = 'yarn install --frozen-lockfile --production'
   }
-  use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-        local saga = require("lspsaga")
-
-        saga.init_lsp_saga()
-    end,
-})
   use {
     'lewis6991/gitsigns.nvim',
      config = function() require('gitsigns').setup() end
-  }
-  use {
-    'nvim-lualine/lualine.nvim',
-     config = function() require('lualine').setup() end
   }
   use {
     'phaazon/hop.nvim',
@@ -51,8 +38,7 @@ require('packer').startup(function()
   use 'jxnblk/vim-mdx-js'
   use 'pangloss/vim-javascript'
   use 'peitalin/vim-jsx-typescript'
-  use 'navarasu/onedark.nvim'
-
+  use 'sainnhe/edge'
 end)
 
 require('telescope').setup{
@@ -74,7 +60,11 @@ require('telescope').setup{
 -- settings -----------------------------
 -----------------------------------------
 
-vim.cmd('colorscheme onedark')
+vim.cmd([[
+  set statusline=%f\ %{gitbranch#name()}\ %=\ %m%r%y%w\ %3l:%-2c
+]])
+vim.cmd('colorscheme edge')
+vim.opt.signcolumn = 'yes:1'
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 20
@@ -141,6 +131,7 @@ map('n', '<C-H>', '<C-W><C-H>')
 map('n', '<leader>p', ':Telescope find_files<cr>')
 map('n', '<leader>g', ':Telescope live_grep<cr>')
 map('n', '<leader>f', ':Prettier<cr>')
+map('n', '<leader>h', ':HopWord<cr>')
 map('n', '<leader>b', ':Telescope buffers<cr>')
 
 
@@ -204,14 +195,9 @@ require('nvim-lsp-installer').on_server_ready(function (server)
   vim.cmd [[ do User LspAttachBuffers ]]
 end)
 
--- local capabilities = require('cmp_nvim_lsp').update_capabilities(
---   vim.lsp.protocol.make_client_capabilities()
--- )
-
 -----------------------------------------
 -- completion ---------------------------
 -----------------------------------------
-  -- Setup nvim-cmp.
   local cmp = require'cmp'
 
   cmp.setup({
