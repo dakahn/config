@@ -1,7 +1,6 @@
 -----------------------------------------
 -- plugins ------------------------------
 -----------------------------------------
-
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
@@ -33,10 +32,16 @@ require('packer').startup(function()
     'phaazon/hop.nvim',
      config = function() require('hop').setup() end
   }
+  use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
   use 'tpope/vim-vinegar'
+  use 'RRethy/vim-illuminate'
   use 'kyazdani42/nvim-web-devicons'
   use 'jxnblk/vim-mdx-js'
   use 'pangloss/vim-javascript'
+  use 'lukas-reineke/indent-blankline.nvim'
   use 'peitalin/vim-jsx-typescript'
   use 'sainnhe/edge'
 end)
@@ -59,7 +64,6 @@ require('telescope').setup{
 -----------------------------------------
 -- settings -----------------------------
 -----------------------------------------
-
 vim.cmd([[
   set statusline=%f\ %{gitbranch#name()}\ %=\ %m%r%y%w\ %3l:%-2c
 ]])
@@ -96,7 +100,7 @@ vim.opt.smartindent = true
 vim.opt.swapfile = false
 vim.opt.wb = false
 vim.opt.backup = false
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 vim.opt.writebackup = false
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.opt.updatetime = 100
@@ -105,7 +109,6 @@ vim.opt.updatetime = 100
 -----------------------------------------
 -- keymaps ------------------------------
 -----------------------------------------
-
 local function map(mode, combo, mapping, opts)
   local options = {noremap = true}
   if opts then
@@ -138,7 +141,6 @@ map('n', '<leader>b', ':Telescope buffers<cr>')
 -----------------------------------------
 -- lsp ----------------------------------
 -----------------------------------------
-
 function default_on_attach(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -195,6 +197,7 @@ require('nvim-lsp-installer').on_server_ready(function (server)
   vim.cmd [[ do User LspAttachBuffers ]]
 end)
 
+
 -----------------------------------------
 -- completion ---------------------------
 -----------------------------------------
@@ -231,6 +234,12 @@ end)
     })
   })
 
+  require'lspconfig'.gopls.setup {
+    on_attach = function(client)
+      require 'illuminate'.on_attach(client)
+    end,
+  }
+
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   require('lspconfig')['tsserver'].setup {
     capabilities = capabilities
@@ -243,7 +252,6 @@ end)
 -----------------------------------------
 -- treesitter ---------------------------
 -----------------------------------------
-
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'css',
