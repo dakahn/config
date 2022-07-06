@@ -1,13 +1,20 @@
+-----------------------------------------
+-- plugins ------------------------------
+-----------------------------------------
+
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-lua/plenary.nvim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} },
+  }
   use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -18,20 +25,36 @@ require('packer').startup(function()
     'prettier/vim-prettier',
     run = 'yarn install --frozen-lockfile --production'
   }
-  use 'lewis6991/gitsigns.nvim'
-  use 'nvim-lualine/lualine.nvim'
-  use 'phaazon/hop.nvim'
+  use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+        local saga = require("lspsaga")
+
+        saga.init_lsp_saga()
+    end,
+})
+  use {
+    'lewis6991/gitsigns.nvim',
+     config = function() require('gitsigns').setup() end
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+     config = function() require('lualine').setup() end
+  }
+  use {
+    'phaazon/hop.nvim',
+     config = function() require('hop').setup() end
+  }
   use 'tpope/vim-vinegar'
   use 'kyazdani42/nvim-web-devicons'
   use 'jxnblk/vim-mdx-js'
   use 'pangloss/vim-javascript'
   use 'peitalin/vim-jsx-typescript'
-  use 'joshdick/onedark.vim'
+  use 'navarasu/onedark.nvim'
 
 end)
 
-require('lualine').setup()
-require('gitsigns').setup()
 require('telescope').setup{
   pickers = {
     live_grep = {
@@ -39,13 +62,17 @@ require('telescope').setup{
     },
     git_files = {
       theme = "dropdown",
+    },
+    find_files = {
+      theme = "dropdown",
     }
   },
 }
-require'hop'.setup()
 
 
-
+-----------------------------------------
+-- settings -----------------------------
+-----------------------------------------
 
 vim.cmd('colorscheme onedark')
 vim.opt.termguicolors = true
@@ -69,7 +96,6 @@ vim.opt.title = true
 vim.opt.ruler = true
 vim.opt.number = true
 vim.opt.so = 7
--- vim.opt.signcolumn = 'yes:1'
 vim.opt.wildmode = { list = {'longest'}}
 vim.opt.wildmenu = true
 vim.opt.expandtab = true
@@ -85,6 +111,11 @@ vim.opt.writebackup = false
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.opt.updatetime = 100
 
+
+-----------------------------------------
+-- keymaps ------------------------------
+-----------------------------------------
+
 local function map(mode, combo, mapping, opts)
   local options = {noremap = true}
   if opts then
@@ -92,9 +123,6 @@ local function map(mode, combo, mapping, opts)
   end
   vim.api.nvim_set_keymap(mode, combo, mapping, options)
 end
-
-
-
 
 vim.g.mapleader = ' '
 map('i', 'jk', '<Esc>')
@@ -110,19 +138,15 @@ map('n', '<C-K>', '<C-W><C-K>')
 map('n', '<C-L>', '<C-W><C-L>')
 map('n', '<C-H>', '<C-W><C-H>')
 
-map('n', '<leader>p', ':Telescope git_files<cr>')
+map('n', '<leader>p', ':Telescope find_files<cr>')
 map('n', '<leader>g', ':Telescope live_grep<cr>')
 map('n', '<leader>f', ':Prettier<cr>')
 map('n', '<leader>b', ':Telescope buffers<cr>')
-map('n', '<leader>t', ':Twilight<cr>')
 
 
-
-
-
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
+-----------------------------------------
+-- lsp ----------------------------------
+-----------------------------------------
 
 function default_on_attach(client, bufnr)
   local function buf_set_keymap(...)
@@ -155,20 +179,13 @@ function default_on_attach(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  {
-    -- border = 'single'
-  }
-)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help)
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'single',
 })
 
-
 local config = {}
 
--- Setup
 require('nvim-lsp-installer').on_server_ready(function (server)
   local opts = {
     capabilities = capabilities,
@@ -187,17 +204,63 @@ require('nvim-lsp-installer').on_server_ready(function (server)
   vim.cmd [[ do User LspAttachBuffers ]]
 end)
 
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(
+--   vim.lsp.protocol.make_client_capabilities()
+-- )
 
+-----------------------------------------
+-- completion ---------------------------
+-----------------------------------------
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
 
+  cmp.setup({
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  require('lspconfig')['tsserver'].setup {
+    capabilities = capabilities
+  }
+
+  require('lspconfig')['cssls'].setup {
+    capabilities = capabilities
+  }
+
+-----------------------------------------
+-- treesitter ---------------------------
+-----------------------------------------
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'css',
-    'dockerfile',
-    'elixir',
-    'go',
-    'gomod',
-    'graphql',
     'html',
     'javascript',
     'jsdoc',
@@ -215,19 +278,5 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     use_languagetree = true,
     additional_vim_regex_highlighting = true
-  },
-  indent = {
-    enable = false,
-  },
-  context_commentstring = {
-    enable = true,
-  },
-  refactor = {
-    highlight_definitions = {
-      enable = true,
-    },
-    highlight_current_scope = {
-      enable = false,
-    },
-  },
+  }
 })
