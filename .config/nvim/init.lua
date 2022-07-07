@@ -1,6 +1,6 @@
------------------------------------------
--- plugins ------------------------------
------------------------------------------
+--------------------------------------------------------------
+-------------------------------------------------------plugins 
+--------------------------------------------------------------
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'neovim/nvim-lspconfig'
@@ -39,11 +39,11 @@ require('packer').startup(function()
   use 'tpope/vim-vinegar'
   use 'RRethy/vim-illuminate'
   use 'kyazdani42/nvim-web-devicons'
+  use 'lukas-reineke/indent-blankline.nvim'
   use 'jxnblk/vim-mdx-js'
   use 'pangloss/vim-javascript'
-  use 'lukas-reineke/indent-blankline.nvim'
   use 'peitalin/vim-jsx-typescript'
-  use 'sainnhe/edge'
+  use 'folke/tokyonight.nvim'
 end)
 
 require('telescope').setup{
@@ -54,6 +54,9 @@ require('telescope').setup{
     git_files = {
       theme = "dropdown",
     },
+    buffers = {
+      theme = "dropdown",
+    },
     find_files = {
       theme = "dropdown",
     }
@@ -61,13 +64,13 @@ require('telescope').setup{
 }
 
 
------------------------------------------
--- settings -----------------------------
------------------------------------------
+--------------------------------------------------------------
+------------------------------------------------------settings 
+--------------------------------------------------------------
 vim.cmd([[
   set statusline=%f\ %{gitbranch#name()}\ %=\ %m%r%y%w\ %3l:%-2c
 ]])
-vim.cmd('colorscheme edge')
+vim.cmd('colorscheme tokyonight')
 vim.opt.signcolumn = 'yes:1'
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
@@ -106,9 +109,9 @@ vim.o.shortmess = vim.o.shortmess .. "c"
 vim.opt.updatetime = 100
 
 
------------------------------------------
--- keymaps ------------------------------
------------------------------------------
+--------------------------------------------------------------
+-------------------------------------------------------keymaps 
+--------------------------------------------------------------
 local function map(mode, combo, mapping, opts)
   local options = {noremap = true}
   if opts then
@@ -138,9 +141,9 @@ map('n', '<leader>h', ':HopWord<cr>')
 map('n', '<leader>b', ':Telescope buffers<cr>')
 
 
------------------------------------------
--- lsp ----------------------------------
------------------------------------------
+--------------------------------------------------------------
+-----------------------------------------------------------lsp 
+--------------------------------------------------------------
 function default_on_attach(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -198,9 +201,9 @@ require('nvim-lsp-installer').on_server_ready(function (server)
 end)
 
 
------------------------------------------
--- completion ---------------------------
------------------------------------------
+--------------------------------------------------------------
+----------------------------------------------------completion 
+--------------------------------------------------------------
   local cmp = require'cmp'
 
   cmp.setup({
@@ -249,9 +252,9 @@ end)
     capabilities = capabilities
   }
 
------------------------------------------
--- treesitter ---------------------------
------------------------------------------
+--------------------------------------------------------------
+----------------------------------------------------treesitter 
+--------------------------------------------------------------
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'css',
