@@ -422,3 +422,5 @@ tmux_conf_uninstall_plugins_on_reload=true
 # "$@"
 # # /!\ do not remove the previous line
 set -g status off
+set -g default-terminal "screen-256color"
+set -ga terminal-overrides ",*256col*:Tc"
