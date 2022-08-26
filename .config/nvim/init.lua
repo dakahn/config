@@ -15,7 +15,7 @@ require('packer').startup(function()
   use 'tpope/vim-commentary'
   use "lewis6991/gitsigns.nvim"
   use "phaazon/hop.nvim"
-  use "windwp/nvim-autopairs"
+  use "jiangmiao/auto-pairs"
   use 'sbdchd/neoformat'
   use 'windwp/nvim-ts-autotag'
   use 'tpope/vim-vinegar'
@@ -50,7 +50,6 @@ require('packer').startup(function()
   use 'nvim-lualine/lualine.nvim'
 end)
 
-require("nvim-autopairs").setup()
 require('hop').setup()
 require('gitsigns').setup()
 require('telescope').setup()
@@ -72,7 +71,7 @@ vim.cmd([[
   autocmd BufWritePre *.js Neoformat
 ]])
 vim.g.neoformat_try_node_exe = 1
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme sonokai]]
 vim.opt.signcolumn = 'yes:1'
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
