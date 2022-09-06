@@ -6,9 +6,6 @@ TERM=screen-256color
 DISABLE_AUTO_TITLE="true"
 fpath=($fpath "/home/dak/.zfunctions")
 setopt autocd
-# Fnm
-export PATH=/home/dakahn/.fnm:$PATH
-eval "`fnm env`"
 # Clipboard config 
 yanktoclipboard(){
       echo $BUFFER | xsel -i -b
@@ -24,7 +21,9 @@ bindkey -a 'yy' yanktoclipboard
 bindkey -a 'p' pastefromclipboard
 eval "$(starship init zsh)"
 export EDITOR="/usr/bin/nvim"
-
+# nvm
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 function current_branch() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(git rev-parse --short HEAD 2> /dev/null) || return
@@ -34,8 +33,7 @@ function current_branch() {
 # System aliases 
 #####################################################
 alias ..='cd ..'
-alias la='ls -la'
-alias lsr='ranger'
+alias ls='nnn -de'
 alias ...='cd .. && cd ..'
 alias c='cd ~/code'
 alias v='nvim'
@@ -92,7 +90,3 @@ alias prebuild='sudo prlimit -p "$$" --nofile=10000:10000 && exec zsh'
 alias bigdev='NODE_OPTIONS=--max_old_space_size=8192 yarn dev'
 
 task ls
-
-# fnm
-export PATH=/home/dakahn/.fnm:$PATH
-eval "`fnm env`"

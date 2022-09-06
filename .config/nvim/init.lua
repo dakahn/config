@@ -48,6 +48,7 @@ require('packer').startup(function()
   use 'folke/tokyonight.nvim'
   use 'sainnhe/sonokai'
   use 'nvim-lualine/lualine.nvim'
+  use 'doums/darcula'
 end)
 
 require('hop').setup()
@@ -71,14 +72,14 @@ vim.cmd([[
   autocmd BufWritePre *.js Neoformat
 ]])
 vim.g.neoformat_try_node_exe = 1
-vim.cmd[[colorscheme sonokai]]
+vim.cmd[[colorscheme darcula]]
 vim.opt.signcolumn = 'yes:1'
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 20
 vim.opt.laststatus = 2
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-vim.opt.showmode = false 
+vim.opt.showmode = false
 vim.opt.showcmd = false
 vim.opt.nu = true
 vim.opt.wrap = false
