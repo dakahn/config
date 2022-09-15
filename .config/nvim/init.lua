@@ -43,8 +43,7 @@ require('packer').startup(function()
       {'rafamadriz/friendly-snippets'},
     }
   }
-  use 'folke/tokyonight.nvim'
-  use 'sainnhe/sonokai'
+  use 'EdenEast/nightfox.nvim'
 end)
 
 require('hop').setup()
@@ -88,7 +87,7 @@ require('nvim-treesitter.configs').setup({
   }
 })
 vim.g.neoformat_try_node_exe = 1
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme carbonfox]]
 vim.opt.signcolumn = 'yes:1'
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
