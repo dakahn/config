@@ -1,6 +1,5 @@
---------------------------------------------------------------
----------------------------------------------------plugins----
---------------------------------------------------------------
+---------------------------------------------------------------------
+--PLUGINS------------------------------------------------------------
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use {
@@ -18,7 +17,6 @@ require('packer').startup(function()
   use "jiangmiao/auto-pairs"
   use 'sbdchd/neoformat'
   use 'windwp/nvim-ts-autotag'
-  use 'tpope/vim-vinegar'
   use 'kyazdani42/nvim-web-devicons'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'jxnblk/vim-mdx-js'
@@ -47,32 +45,50 @@ require('packer').startup(function()
   }
   use 'folke/tokyonight.nvim'
   use 'sainnhe/sonokai'
-  use 'nvim-lualine/lualine.nvim'
-  use 'doums/darcula'
 end)
 
 require('hop').setup()
 require('gitsigns').setup()
 require('telescope').setup()
 require('nvim-ts-autotag').setup()
-require('lualine').setup()
 require("indent_blankline").setup()
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.nvim_workspace()
 lsp.setup()
 
---------------------------------------------------------------
---------------------------------------------------settings---- 
---------------------------------------------------------------
+---------------------------------------------------------------------
+--SETTINGS-----------------------------------------------------------
 vim.cmd([[
-  set statusline=%t\ %{gitbranch#name()}\ %=\ %m%r%y%w\ %4l:%-2c
+  set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\ 
 ]])
 vim.cmd([[
   autocmd BufWritePre *.js Neoformat
 ]])
+require('nvim-treesitter.configs').setup({
+  ensure_installed = {
+    'css',
+    'html',
+    'javascript',
+    'jsdoc',
+    'json',
+    'json5',
+    'lua',
+    'scss',
+    'toml',
+    'tsx',
+    'typescript',
+    'vim',
+    'yaml',
+  },
+  highlight = {
+    enable = true,
+    use_languagetree = true,
+    additional_vim_regex_highlighting = true
+  }
+})
 vim.g.neoformat_try_node_exe = 1
-vim.cmd[[colorscheme darcula]]
+vim.cmd[[colorscheme tokyonight]]
 vim.opt.signcolumn = 'yes:1'
 vim.opt.termguicolors = true
 vim.opt.foldmethod = 'indent'
@@ -110,9 +126,8 @@ vim.opt.writebackup = false
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.opt.updatetime = 100
 
---------------------------------------------------------------
----------------------------------------------------keymaps---- 
---------------------------------------------------------------
+---------------------------------------------------------------------
+--KEYMAPS------------------------------------------------------------
 local function map(mode, combo, mapping, opts)
   local options = {noremap = true}
   if opts then
@@ -135,34 +150,9 @@ map('n', '<C-K>', '<C-W><C-K>')
 map('n', '<C-L>', '<C-W><C-L>')
 map('n', '<C-H>', '<C-W><C-H>')
 
-map('n', '<leader>p', ':Telescope find_files<cr>')
-map('n', '<leader>g', ':Telescope live_grep<cr>')
+map('n', '<leader>p', ':Telescope find_files theme=dropdown<cr>')
+map('n', '<leader>g', ':Telescope live_grep theme=dropdown<cr>')
 map('n', '<leader>h', ':HopWord<cr>')
 map('n', '<leader>f', ':Neoformat<cr>')
-map('n', '<leader>b', ':Telescope buffers<cr>')
+map('n', '<leader>b', ':Telescope buffers theme=dropdown<cr>')
 
---------------------------------------------------------------
-------------------------------------------------treesitter---- 
---------------------------------------------------------------
-require('nvim-treesitter.configs').setup({
-  ensure_installed = {
-    'css',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'json5',
-    'lua',
-    'scss',
-    'toml',
-    'tsx',
-    'typescript',
-    'vim',
-    'yaml',
-  },
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-    additional_vim_regex_highlighting = true
-  }
-})

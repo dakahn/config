@@ -1,11 +1,12 @@
-#####################################################
-# Setup 
-#####################################################
+#####################################################################
+# setup 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 TERM=screen-256color
 DISABLE_AUTO_TITLE="true"
 fpath=($fpath "/home/dak/.zfunctions")
 setopt autocd
+export EDITOR="/usr/bin/nvim"
+eval "$(starship init zsh)"
 # Clipboard config 
 yanktoclipboard(){
       echo $BUFFER | xsel -i -b
@@ -19,19 +20,12 @@ zle -N yanktoclipboard
 zle -N pastefromclipboard
 bindkey -a 'yy' yanktoclipboard
 bindkey -a 'p' pastefromclipboard
-eval "$(starship init zsh)"
-export EDITOR="/usr/bin/nvim"
 # nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-function current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-  echo ${ref#refs/heads/}
-}
-#####################################################
-# System aliases 
-#####################################################
+
+#####################################################################
+# aliases 
 alias ..='cd ..'
 alias ls='nnn -de'
 alias ...='cd .. && cd ..'
@@ -41,7 +35,9 @@ alias vf='v $(fzf)'
 alias vcfg='nvim ~/.config/nvim/init.lua'
 alias zcfg='nvim ~/.zshrc'
 alias zsrc='source ~/.zshrc'
-alias backup_config='
+# https://www.atlassian.com/git/tutorials/dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias ggconfig='
   config add ~/.config/nvim/init.lua \
   ~/.taskrc \
   ~/.tmux.conf.local \
@@ -51,10 +47,12 @@ alias backup_config='
 '
 alias gogh='bash -c "$(wget -qO- https://git.io/vQgMr)"'
 
-#####################################################
 # Git
-#####################################################
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+function current_branch() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  echo ${ref#refs/heads/}
+}
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add --all'
@@ -74,19 +72,5 @@ alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gsta='git stash push'
 alias gstp='git stash pop'
 alias ggclean='gco -- .'
-
-
-#####################################################
-# Carbon aliases 
-#####################################################
-alias carb='cd ~/code/carbon'
-alias carbr='cd ~/code/carbon/packages/react'
-alias carbs='cd ~/code/carbon-website'
-alias runcarb='cd ~/code/carbon/packages/react && yarn run storybook'
-alias runtests='yarn test --changedSince=master'
-alias format='npx prettier --write .'
-# Raises the limit to 10000 open files for the current session and reloads the shell
-alias prebuild='sudo prlimit -p "$$" --nofile=10000:10000 && exec zsh'
-alias bigdev='NODE_OPTIONS=--max_old_space_size=8192 yarn dev'
 
 task ls
