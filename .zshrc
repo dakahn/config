@@ -1,13 +1,13 @@
-#####################################################################
-# setup 
+## setup ################################################################# 
+##########################################################################
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 TERM=screen-256color
 DISABLE_AUTO_TITLE="true"
 fpath=($fpath "/home/dak/.zfunctions")
 setopt autocd
-export EDITOR="/usr/bin/nvim"
+export EDITOR="/opt/homebrew/bin/nvim"
 eval "$(starship init zsh)"
-# Clipboard config 
+## Clipboard config 
 yanktoclipboard(){
       echo $BUFFER | xsel -i -b
       
@@ -20,14 +20,11 @@ zle -N yanktoclipboard
 zle -N pastefromclipboard
 bindkey -a 'yy' yanktoclipboard
 bindkey -a 'p' pastefromclipboard
-# nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-#####################################################################
-# aliases 
+## aliases ############################################################### 
+##########################################################################
 alias ..='cd ..'
-alias ls='nnn -de'
+alias ls='nnn -H -e'
 alias ...='cd .. && cd ..'
 alias c='cd ~/code'
 alias v='nvim'
@@ -35,7 +32,7 @@ alias vf='v $(fzf)'
 alias vcfg='nvim ~/.config/nvim/init.lua'
 alias zcfg='nvim ~/.zshrc'
 alias zsrc='source ~/.zshrc'
-# https://www.atlassian.com/git/tutorials/dotfiles
+## https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias ggconfig='
   config add ~/.config/nvim/init.lua \
@@ -45,9 +42,7 @@ alias ggconfig='
   && config commit \
   && config push \
 '
-alias gogh='bash -c "$(wget -qO- https://git.io/vQgMr)"'
-
-# Git
+## Git
 function current_branch() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(git rev-parse --short HEAD 2> /dev/null) || return
