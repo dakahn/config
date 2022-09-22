@@ -41,7 +41,7 @@ alias ggconfig='
   ~/.zshrc \
   ~/.README.md \
   && config commit \
-  && config push \
+  && config push origin main\
 '
 ## Git
 function current_branch() {
