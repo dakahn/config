@@ -20,6 +20,7 @@ zle -N yanktoclipboard
 zle -N pastefromclipboard
 bindkey -a 'yy' yanktoclipboard
 bindkey -a 'p' pastefromclipboard
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 ## aliases ############################################################### 
 ##########################################################################
@@ -27,7 +28,7 @@ alias ..='cd ..'
 alias ls='nnn -H -e'
 alias ...='cd .. && cd ..'
 alias c='cd ~/code'
-alias v='nvim'
+alias v='nvim $(fzf)'
 alias vf='v $(fzf)'
 alias vcfg='nvim ~/.config/nvim/init.lua'
 alias zcfg='nvim ~/.zshrc'
@@ -69,4 +70,3 @@ alias gsta='git stash push'
 alias gstp='git stash pop'
 alias ggclean='gco -- .'
 
-task ls

@@ -46,6 +46,7 @@ require('packer').startup(function()
   use 'nvim-lualine/lualine.nvim'
   use 'kyazdani42/nvim-tree.lua'
   use 'styled-components/vim-styled-components'
+  use 'Glench/Vim-Jinja2-Syntax'
   use 'sainnhe/everforest'
 end)
 
@@ -68,6 +69,9 @@ vim.cmd([[
 ]])
 vim.cmd([[
   autocmd BufWritePre *.js Neoformat
+]])
+vim.cmd([[
+  let g:neoformat_try_node_exe = 1
 ]])
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
