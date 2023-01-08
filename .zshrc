@@ -40,7 +40,6 @@ alias ggconfig='
   ~/.taskrc \
   ~/.tmux.conf.local \
   ~/.zshrc \
-  ~/.README.md \
   && config commit \
   && config push origin main\
 '
