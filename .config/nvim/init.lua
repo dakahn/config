@@ -9,8 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"https://github.com/folke/lazy.nvim.git",
 		"--branch=stable", -- latest stable release
 		lazypath,
-	})
-end
+	}) end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -21,6 +20,7 @@ require("lazy").setup({
 	"jiangmiao/auto-pairs",
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-commentary",
+  "tpope/vim-vinegar",
 	"itchyny/vim-gitbranch",
 	"nvim-telescope/telescope.nvim",
 	"nvim-lua/plenary.nvim",
