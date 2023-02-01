@@ -69,3 +69,5 @@ alias gsta='git stash push'
 alias gstp='git stash pop'
 alias ggclean='gco -- .'
 
+
+source /Users/a607328/.docker/init-zsh.sh || true # Added by Docker Desktop
