@@ -28,6 +28,7 @@ require("lazy").setup({
 	"stevearc/dressing.nvim",
 	"phaazon/hop.nvim",
 	"nvim-lualine/lualine.nvim",
+  "folke/trouble.nvim",
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -175,6 +176,7 @@ map("n", "<leader>g", ":Telescope live_grep theme=dropdown<cr>")
 map("n", "<leader>h", ":HopWord<cr>")
 map("n", "<leader>f", ":Neoformat<cr>")
 map("n", "<leader>b", ":Telescope buffers theme=dropdown<cr>")
+map("n", "<leader>t", ":TroubleToggle<cr>")
 
 -- AUTOCOMMANDS ----------------------------------------------------------
 --------------------------------------------------------------------------

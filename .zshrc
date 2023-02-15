@@ -68,6 +68,7 @@ alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
 alias gsta='git stash push'
 alias gstp='git stash pop'
 alias ggclean='gco -- .'
+alias gbd='git branch | grep -v "master\|main" | xargs git branch -D'
 
 
 source /Users/a607328/.docker/init-zsh.sh || true # Added by Docker Desktop
