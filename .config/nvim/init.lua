@@ -73,14 +73,11 @@ lsp.setup()
 
 -- SETTINGS --------------------------------------------------------------
 --------------------------------------------------------------------------
--- vim.cmd([[
---   set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\
--- ]])
 vim.cmd([[
-  autocmd BufWritePre *.js Neoformat
+  set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\
 ]])
 vim.cmd([[
-  let g:neoformat_try_node_exe = 1
+  autocmd BufWritePre *.js Neoformat
 ]])
 -- Diagnostic feedback
 vim.diagnostic.config({
