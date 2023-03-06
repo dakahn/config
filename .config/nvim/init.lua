@@ -9,7 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
 		"https://github.com/folke/lazy.nvim.git",
 		"--branch=stable", -- latest stable release
 		lazypath,
-	}) end
+	})
+end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -20,7 +21,7 @@ require("lazy").setup({
 	"jiangmiao/auto-pairs",
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-commentary",
-  "tpope/vim-vinegar",
+	"tpope/vim-vinegar",
 	"itchyny/vim-gitbranch",
 	"nvim-telescope/telescope.nvim",
 	"nvim-lua/plenary.nvim",
@@ -28,24 +29,29 @@ require("lazy").setup({
 	"stevearc/dressing.nvim",
 	"phaazon/hop.nvim",
 	"nvim-lualine/lualine.nvim",
-  "folke/trouble.nvim",
+	"folke/trouble.nvim",
+	"windwp/nvim-ts-autotag",
+	"MaxMEllon/vim-jsx-pretty",
+	"yuezk/vim-js",
+	"styled-components/vim-styled-components",
+  "hail2u/vim-css3-syntax",
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v1.x",
 		dependencies = {
 			-- LSP Support
-			{ "neovim/nvim-lspconfig" }, 
-			{ "williamboman/mason.nvim" }, 
-			{ "williamboman/mason-lspconfig.nvim" }, 
+			{ "neovim/nvim-lspconfig" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 
 			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, 
-			{ "hrsh7th/cmp-nvim-lsp" }, 
-			{ "hrsh7th/cmp-buffer" }, 
-			{ "hrsh7th/cmp-path" }, 
-			{ "saadparwaiz1/cmp_luasnip" }, 
-			{ "hrsh7th/cmp-nvim-lua" }, 
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lua" },
 		},
 	},
 })
@@ -63,6 +69,7 @@ require("lualine").setup({
 })
 vim.cmd([[colorscheme everforest]])
 require("hop").setup()
+require('gitsigns').setup()
 -- Learn the keybindings, see :help lsp-zero-keybindings
 -- Learn to configure LSP servers, see :help lsp-zero-api-showcase
 local lsp = require("lsp-zero")
@@ -81,9 +88,9 @@ vim.cmd([[
 ]])
 -- Diagnostic feedback
 vim.diagnostic.config({
-	virtual_text = false,
-	-- signs = false,
-	underline = false,
+	virtual_text = true,
+	signs = true,
+	underline = true,
 })
 vim.g.neoformat_try_node_exe = 1
 vim.cmd([[colorscheme everforest]])
@@ -92,6 +99,7 @@ vim.g.maplocalleader = " "
 
 local opt = vim.opt
 
+vim.opt.swapfile = false
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 1
