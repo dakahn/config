@@ -14,7 +14,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"sainnhe/everforest",
 	"lukas-reineke/indent-blankline.nvim",
 	"kyazdani42/nvim-web-devicons",
 	"sbdchd/neoformat",
@@ -25,16 +24,12 @@ require("lazy").setup({
 	"itchyny/vim-gitbranch",
 	"nvim-telescope/telescope.nvim",
 	"nvim-lua/plenary.nvim",
-	"rcarriga/nvim-notify",
-	"stevearc/dressing.nvim",
 	"phaazon/hop.nvim",
 	"nvim-lualine/lualine.nvim",
-	"folke/trouble.nvim",
-	"windwp/nvim-ts-autotag",
-	"MaxMEllon/vim-jsx-pretty",
 	"yuezk/vim-js",
 	"styled-components/vim-styled-components",
-  "hail2u/vim-css3-syntax",
+	"sainnhe/everforest",
+  "mbbill/undotree",
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -50,26 +45,15 @@ require("lazy").setup({
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
+			{ "L3MON4D3/LuaSnip" },
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lua" },
 		},
 	},
 })
 
-require("lualine").setup({
-	sections = {
-		lualine_x = {
-			{
-				require("lazy.status").updates,
-				cond = require("lazy.status").has_updates,
-				color = { fg = "#ff9e64" },
-			},
-		},
-	},
-})
-vim.cmd([[colorscheme everforest]])
 require("hop").setup()
-require('gitsigns').setup()
+require("gitsigns").setup()
 -- Learn the keybindings, see :help lsp-zero-keybindings
 -- Learn to configure LSP servers, see :help lsp-zero-api-showcase
 local lsp = require("lsp-zero")
@@ -81,7 +65,7 @@ lsp.setup()
 -- SETTINGS --------------------------------------------------------------
 --------------------------------------------------------------------------
 vim.cmd([[
-  set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\
+  set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\ 
 ]])
 vim.cmd([[
   autocmd BufWritePre *.js Neoformat
@@ -96,10 +80,12 @@ vim.g.neoformat_try_node_exe = 1
 vim.cmd([[colorscheme everforest]])
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.undotree_SetFocusWhenToggle = 1
 
 local opt = vim.opt
 
 vim.opt.swapfile = false
+opt.textwidth = 80
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 1
@@ -116,7 +102,7 @@ opt.hidden = true -- Enable modified buffers in background
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.joinspaces = false -- No double spaces with join after a dot
-opt.list = true -- Show some invisible characters (tabs...
+-- opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
@@ -139,10 +125,8 @@ opt.termguicolors = true -- True color support
 opt.timeoutlen = 300
 opt.undofile = true
 opt.undolevels = 10000
-opt.updatetime = 200 -- save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- minimum window width
-opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
 	opt.splitkeep = "screen"
@@ -181,7 +165,7 @@ map("n", "<leader>g", ":Telescope live_grep theme=dropdown<cr>")
 map("n", "<leader>h", ":HopWord<cr>")
 map("n", "<leader>f", ":Neoformat<cr>")
 map("n", "<leader>b", ":Telescope buffers theme=dropdown<cr>")
-map("n", "<leader>t", ":TroubleToggle<cr>")
+map("n", "<leader>u", ":UndotreeToggle<cr>")
 
 -- AUTOCOMMANDS ----------------------------------------------------------
 --------------------------------------------------------------------------
