@@ -28,8 +28,8 @@ require("lazy").setup({
 	"nvim-lualine/lualine.nvim",
 	"yuezk/vim-js",
 	"styled-components/vim-styled-components",
-	"sainnhe/everforest",
-  "mbbill/undotree",
+	"mbbill/undotree",
+  "sainnhe/everforest",
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -51,28 +51,26 @@ require("lazy").setup({
 		},
 	},
 })
-
-require("hop").setup()
-require("gitsigns").setup()
--- Learn the keybindings, see :help lsp-zero-keybindings
--- Learn to configure LSP servers, see :help lsp-zero-api-showcase
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
--- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
 lsp.setup()
+require("hop").setup()
+require("gitsigns").setup()
+require('lualine').setup()
 
 -- SETTINGS --------------------------------------------------------------
 --------------------------------------------------------------------------
-vim.cmd([[
-  set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\ 
-]])
+-- vim.cmd([[
+--   set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\ 
+-- ]])
 vim.cmd([[
   autocmd BufWritePre *.js Neoformat
 ]])
 -- Diagnostic feedback
+vim.o.updatetime = 250
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 vim.diagnostic.config({
-	virtual_text = true,
 	signs = true,
 	underline = true,
 })
@@ -81,6 +79,9 @@ vim.cmd([[colorscheme everforest]])
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.undotree_SetFocusWhenToggle = 1
+--MDX support NOT SUPPORTED IN LATEST NVIM lol great
+-- local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
+-- ft_to_parser.mdx = "markdown"
 
 local opt = vim.opt
 
