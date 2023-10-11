@@ -30,6 +30,7 @@ require("lazy").setup({
 	"styled-components/vim-styled-components",
 	"mbbill/undotree",
   "sainnhe/everforest",
+  "vimwiki/vimwiki",
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -61,9 +62,9 @@ require('lualine').setup()
 
 -- SETTINGS --------------------------------------------------------------
 --------------------------------------------------------------------------
--- vim.cmd([[
---   set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\ 
--- ]])
+vim.cmd([[
+  set statusline=\ %f\ %{gitbranch#name()}%m%=\ %R%y%W\ %6l:%-2c\ 
+]])
 vim.cmd([[
   autocmd BufWritePre *.js Neoformat
 ]])
@@ -85,8 +86,9 @@ vim.g.undotree_SetFocusWhenToggle = 1
 
 local opt = vim.opt
 
+vim.opt.textwidth = 80
+vim.opt.linebreak = true
 vim.opt.swapfile = false
-opt.textwidth = 80
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 1
@@ -103,7 +105,6 @@ opt.hidden = true -- Enable modified buffers in background
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.joinspaces = false -- No double spaces with join after a dot
--- opt.list = true -- Show some invisible characters (tabs...
 opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
@@ -151,6 +152,7 @@ vim.g.mapleader = " "
 map("i", "jk", "<Esc>")
 map("n", "<leader>s", ":Sex<cr>")
 map("n", "<Esc>", ":noh<cr>")
+map("n", "<leader>r", "gggqG")
 -- keep cursor in the middle
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
@@ -162,6 +164,7 @@ map("n", "<C-L>", "<C-W><C-L>")
 map("n", "<C-H>", "<C-W><C-H>")
 -- plugins
 map("n", "<leader><leader>", ":Telescope find_files theme=dropdown<cr>")
+map("n", "<leader>ww", ":VimwikiIndex<cr>")
 map("n", "<leader>g", ":Telescope live_grep theme=dropdown<cr>")
 map("n", "<leader>h", ":HopWord<cr>")
 map("n", "<leader>f", ":Neoformat<cr>")

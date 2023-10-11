@@ -1,6 +1,6 @@
 ## setup ################################################################# 
 ##########################################################################
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 autoload -Uz compinit && compinit
 TERM=screen-256color
 DISABLE_AUTO_TITLE="true"
@@ -45,7 +45,8 @@ alias ggconfig='
   && config commit \
   && config push origin main\
 '
-## Git
+## Git ################################################################### 
+##########################################################################
 function current_branch() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(git rev-parse --short HEAD 2> /dev/null) || return
@@ -63,7 +64,7 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gd='git diff'
 alias ggpull='git pull origin $(current_branch)'
-alias gprm='git pull --rebase origin master'
+alias gprom='git pull --rebase origin master'
 alias ggpush='git push --set-upstream origin $(current_branch)'
 alias glum='git pull upstream main'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
