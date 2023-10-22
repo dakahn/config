@@ -29,7 +29,7 @@ require("lazy").setup({
 	"yuezk/vim-js",
 	"styled-components/vim-styled-components",
 	"mbbill/undotree",
-  "sainnhe/everforest",
+	'stevedylandev/flexoki-nvim', name = 'flexoki',
   "vimwiki/vimwiki",
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	{
@@ -58,7 +58,7 @@ lsp.nvim_workspace()
 lsp.setup()
 require("hop").setup()
 require("gitsigns").setup()
-require('lualine').setup()
+-- require('lualine').setup()
 
 -- SETTINGS --------------------------------------------------------------
 --------------------------------------------------------------------------
@@ -76,7 +76,7 @@ vim.diagnostic.config({
 	underline = true,
 })
 vim.g.neoformat_try_node_exe = 1
-vim.cmd([[colorscheme everforest]])
+vim.cmd([[colorscheme flexoki]])
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.undotree_SetFocusWhenToggle = 1
