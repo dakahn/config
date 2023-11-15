@@ -85,6 +85,7 @@ set updatetime=100
 " REMAPS
 let mapleader = " "
 inoremap jk <Esc>
+nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
 " keep cursor in the middle
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -106,3 +107,4 @@ nnoremap <leader>g :GFiles<cr>
 nnoremap <leader>f :Files<cr> 
 nnoremap <leader>r :Rg<cr>
 nnoremap <leader>b :Buffer<cr>
+
