@@ -21,7 +21,6 @@ require('lazy').setup({
   'tpope/vim-sleuth',     -- Detect tabstop and shiftwidth automatically
   'tpope/vim-vinegar',    -- Netrw enhancements
   'jiangmiao/auto-pairs', -- Insert brackets, parens, quotes in pairs
-  'nvim-tree/nvim-web-devicons',
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -44,8 +43,8 @@ require('lazy').setup({
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
+    opts = {}
   },
-
   {
     'hrsh7th/nvim-cmp',
     dependencies = {
