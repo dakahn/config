@@ -7,10 +7,10 @@ alias ..='cd ..'
 alias ...='cd .. && cd ..'
 alias la='ls -la'
 alias code='cd ~/code'
-alias v='vim'
+alias v='nvim'
 alias vf='nvim $(fzf)'
-alias vcfg='vim ~/.vimrc'
-alias zcfg='vim ~/.zshrc'
+alias vcfg='v ~/.config/nvim/init.lua'
+alias zcfg='v ~/.zshrc'
 alias zsrc='source ~/.zshrc'
 ## https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -18,7 +18,6 @@ alias nuke='echo 💣 NUKING LOCAL DEPENDENCIES 💣 && yarn cache clean && rm -
 alias ggconfig='
   config add ~/.config/nvim/init.lua \
   ~/.taskrc \
-  ~/.tmux.conf.local \
   ~/.zshrc \
   && config commit \
   && config push origin main\
