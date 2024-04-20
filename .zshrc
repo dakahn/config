@@ -18,6 +18,7 @@ alias nuke='echo 💣 NUKING LOCAL DEPENDENCIES 💣 && yarn cache clean && rm -
 alias ggconfig='
   config add ~/.config/nvim/init.lua \
   ~/.taskrc \
+  ~/.tmux.conf.local \
   ~/.zshrc \
   && config commit \
   && config push origin wsl\
