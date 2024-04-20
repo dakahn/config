@@ -15,12 +15,10 @@ alias zsrc='source ~/.zshrc'
 ## https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias nuke='echo 💣 NUKING LOCAL DEPENDENCIES 💣 && yarn cache clean && rm -rf node_modules && yarn install --check-files'
-alias ggconfig='
+alias configaa='
   config add ~/.config/nvim/init.lua \
   ~/.taskrc \
   ~/.zshrc \
-  && config commit \
-  && config push origin master\
 '
 ## git
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
