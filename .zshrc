@@ -20,7 +20,7 @@ alias ggconfig='
   ~/.taskrc \
   ~/.zshrc \
   && config commit \
-  && config push origin main\
+  && config push origin master\
 '
 ## git
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
