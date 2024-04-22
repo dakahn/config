@@ -34,6 +34,8 @@ alias vf='vim $(fzf)'
 alias vcfg='v ~/.config/nvim/init.lua'
 alias zcfg='v ~/.zshrc'
 alias zsrc='source ~/.zshrc'
+alias recon='osascript ~/Desktop/Scripts/recon.scpt'
+alias recoff='osascript ~/Desktop/Scripts/recoff.scpt'
 ## https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias nuke='echo 💣 NUKING LOCAL DEPENDENCIES 💣 && yarn cache clean && rm -rf node_modules && yarn install --check-files'
@@ -61,7 +63,7 @@ alias gcm='git commit -m'
 alias gsc='git switch -c'
 alias gsm='git switch main'
 alias gco='git checkout'
-alias gfo='git fetch origin'
+alias gf='git fetch origin'
 alias gcob='git checkout -b'
 alias gd='git diff'
 alias ggpull='git pull origin $(current_branch)'
@@ -75,6 +77,10 @@ alias gstp='git stash pop'
 alias ggclean='gco -- .'
 alias gbd='git branch | grep -v "master\|main" | xargs git branch -D'
 
+## Work ################################################################## 
+##########################################################################
+alias yrs='yarn run storybook'
+alias yrd='yarn run dev'
 
 source /Users/a607328/.docker/init-zsh.sh || true # Added by Docker Desktop
 task
