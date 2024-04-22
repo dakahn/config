@@ -1,1 +1,25 @@
-![a very green and foresty neovim config--I don't know, man](https://i.imgur.com/S5zTBvp.png)
+## My dotfiles
+
+```
+              --      --
+            .:"  | .:'" |
+          --  ___   ___  -
+        /:.  /  .\ /.  \ .\
+       |:|. ;\___/O\___/  :|
+       |:|. |  `__|__'  | .|
+       |:|.  \_,     ,_/  /
+        \______       |__/
+         |:.           \
+        /.:,|  |        \
+       /.:,.|  |         \
+       |::.. \_;_\-;       |
+ _____|::..    .::|       |
+/   ----,     .::/__,    /__,
+\_______|,...____;_;_|../_;_|
+```
+
+Including low-brow configs for:
+- Neovim
+- tmux
+- ZSH
+- Taskwarrior
