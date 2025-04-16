@@ -17,8 +17,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias nuke='echo 💣 NUKING LOCAL DEPENDENCIES 💣 && yarn cache clean && rm -rf node_modules && yarn install --check-files'
 alias ggconfig='
   config add ~/.config/nvim/init.lua \
+  ~/.config/nvim/lua/plugins/ \
   ~/.taskrc \
-  ~/.tmux.conf.local \
   ~/.zshrc \
   && config commit \
   && config push origin wsl\
